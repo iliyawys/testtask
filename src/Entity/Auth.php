@@ -28,13 +28,18 @@ class Auth
      */
     private $uid;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date", type="datetime", nullable=true)
-     */
-    private $date = 'CURRENT_TIMESTAMP';
 
+    /** 
+     *  @PrePersist 
+     */
+    // public function doStuffOnPrePersist()
+    // {
+    //     $this->date = new \DateTime();
+    // }
+
+    public function setUid($uid)
+    {
+        $this->uid = $uid;
+    }
 
 }
-

@@ -79,6 +79,11 @@ class User implements UserInterface
      */
     private $birthday;
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
     public function getFirstName()
     {
         return $this->firstName;

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Auth;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,11 +27,29 @@ class SecurityController extends Controller
     }
 
     /**
- * @Route("/login_check", name="_login_check")
- */
-public function securityCheckAction()
-{
-    // this controller will not be executed,
-    // as the route is handled by the Security system
-}
+     * @Route("/successAuth", name="successAuth")
+     */
+    public function successAuthAction()
+    {
+        $user = $this->getUser();
+
+        $entityManager = $this->getDoctrine()->getManager();
+        
+        $auth = new Auth();
+        $auth->setUid($user->getId());
+        
+        $entityManager->persist($auth);
+        $entityManager->flush();
+        
+        return $this->redirectToRoute('home');
+    }
+
+    /**
+     * @Route("/login_check", name="_login_check")
+     */
+    public function securityCheckAction()
+    {
+        // this controller will not be executed,
+        // as the route is handled by the Security system
+    }
 }

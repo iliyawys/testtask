@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class StatisticController extends Controller
 {
     /**
-     * @Route("/stat1")
+     * @Route("/stat")
      */
     public function statisticAction()
     {
