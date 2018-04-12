@@ -10,10 +10,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * Users
  *
- * @ORM\Table(name="users")
+ * @ORM\Table(name="user")
  * @ORM\Entity
+ * @UniqueEntity(fields="email", message="Email already taken")
  */
-class Users implements UserInterface
+class User implements UserInterface
 {
     /**
      * @ORM\Id
@@ -40,6 +41,7 @@ class Users implements UserInterface
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     * @Assert\Email()
      */
     private $email;
 

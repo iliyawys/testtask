@@ -3,15 +3,22 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+        <link href="css/main.css" rel="stylesheet" type="text/css" />
+        {% endblock %}
     </head>
     <body>
         {% block body %}
         <div id="mainmenu">
             <ul>
+                <li><a href="/">home</a></li>
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <li><a href="{{ logout_path('main') }}">logout ({{ app.user.firstname }})</a></li>
+                <li><a href="statistics">statistics</a></li>
+                {% else %}
                 <li><a href="login">login</a></li>
                 <li><a href="registration">register</a></li>
-                <li><a href="statistics">statistics</a></li>
+                {% endif %}
             </ul>
         </div>
             {% block content %}
