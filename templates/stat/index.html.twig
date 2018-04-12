@@ -28,6 +28,15 @@
         </tr>
     </table>
     <h3>Посещало за 7 дней</h3>
+    <table>
+    <tr>
+        <td>Имя</td>
+        {% for a in authForWeek %}
+            <td>{{ a.dateAsMonth|e }}</td>
+        {% endfor %}
+        </td>
+    </tr>
+    </table>
     <h3>Дни рождения 7 дня</h3>
     <table>
         <tr>

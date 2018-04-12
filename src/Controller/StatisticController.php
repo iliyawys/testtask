@@ -24,8 +24,11 @@ class StatisticController extends Controller
         $registerPerMonth = $userRepository->allRegisterUserByDate(date('Y-m-01'));
         
         $authForWeek = $authRepository->allActiveLoginByDate(7);
+        $usersForWeek = $authRepository->allActiveLoginByUsername(7);
+
         $birthdaysForSevenDay = $userRepository->birthdayByDate(7);
         $birthdaysForThreeDay = $userRepository->birthdayByDate(3);
+
 
         return $this->render(
             'stat/index.html.twig',
@@ -34,6 +37,7 @@ class StatisticController extends Controller
                 'authForWeek' => $authForWeek,
                 'birthdaysForSevenDay' => $birthdaysForSevenDay,
                 'birthdaysForThreeDay' => $birthdaysForThreeDay,
+                'usersForWeek' => $usersForWeek
             ]
         );
     }

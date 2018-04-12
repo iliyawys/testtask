@@ -33,6 +33,25 @@ class AuthRepository extends ServiceEntityRepository
                     ->getResult();
     }
 
-    
+    /**
+     * @param $day
+     * @return Auth[]
+     */
+    public function allActiveLoginByUsername($dayBack): array
+    {
+        $entityManager = $this->getEntityManager();
+        $startDateTimestamp = getdate(mktime(0, 0, 0, date('m'), date('d') - (int) $dayBack, date('Y')))[0];
+        $startDate = date('Y-m-d',$startDateTimestamp);
+
+        return $qb = $this->createQueryBuilder('e')
+                    ->select('DATE(e.created_at) as dateAsMonth, e.uid')
+                    ->andWhere('e.created_at >= :created_at')
+                    ->setParameter('created_at', $startDate)
+                    ->groupBy('e.uid, dateAsMonth')
+                    ->getQuery()
+                    ->getResult();
+                    
+        return [];
+    }
 
 }
