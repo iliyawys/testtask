@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block content %}
-
+<div id="reg_form">
 {{ form_start(form) }}
     {{ form_row(form.first_name) }}
     {{ form_row(form.second_name) }}
@@ -13,5 +13,6 @@
 
     <button type="submit">Register!!!</button>
 {{ form_end(form) }}
+</div>
 
 {% endblock %}

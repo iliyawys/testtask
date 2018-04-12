@@ -9,7 +9,7 @@
     </head>
     <body>
         {% block body %}
-        <div id="mainmenu">
+        <nav id="mainmenu">
             <ul>
                 <li><a href="/">home</a></li>
                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
@@ -17,13 +17,15 @@
                     <li><a href="{{ logout_path('main') }}">logout ({{ app.user.firstname }})</a></li>
                 {% else %}
                     <li><a href="login">login</a></li>
-                    <li><a href="registration">register</a></li>
+                    <li><a href="register">register</a></li>
                 {% endif %}
             </ul>
-        </div>
+        </nav>
+        <div>
             {% block content %}
 
             {% endblock %}
+        </div>
         {% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

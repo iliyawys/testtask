@@ -131,8 +131,7 @@ class User implements UserInterface
 
     public function setBirthday($birthday)
     {
-        $this->birthday = new \DateTime("now");
-        // $this->birthday = $birthday;
+        $this->birthday = $birthday;
     }
 
     public function getEmail()

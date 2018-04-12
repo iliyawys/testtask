@@ -28,18 +28,26 @@ class Auth
      */
     private $uid;
 
-
-    /** 
-     *  @PrePersist 
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
      */
-    // public function doStuffOnPrePersist()
-    // {
-    //     $this->date = new \DateTime();
-    // }
+    private $created_at;
+
+    function __construct()
+    {
+        $this->created_at = new \DateTime();
+    }
 
     public function setUid($uid)
     {
         $this->uid = $uid;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->created_at;
     }
 
 }
