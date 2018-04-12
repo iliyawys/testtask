@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * Users
  *
  * @ORM\Table(name="user")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields="email", message="Email already taken")
  */
 class User implements UserInterface
@@ -78,6 +78,23 @@ class User implements UserInterface
      * @ORM\Column(name="birthday", type="datetime", nullable=false)
      */
     private $birthday;
+
+    /**
+     * @var datetime
+     *
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
+     */
+    private $created_at;
+
+    function __construct()
+    {
+        $this->created_at = new \DateTime();
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
 
     public function getId()
     {

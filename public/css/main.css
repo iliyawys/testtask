@@ -1,4 +1,6 @@
 body {padding: 10px 100px;}
+table {border-collapse: collapse;}
+table tr td {border: solid black 1px; padding: 4px;text-align: center;}
 #mainmenu ul li{
 	list-style: none;
 	display: inline;

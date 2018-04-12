@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Auth
  *
  * @ORM\Table(name="auth")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Repository\AuthRepository")
  */
 class Auth
 {
@@ -40,14 +40,14 @@ class Auth
         $this->created_at = new \DateTime();
     }
 
-    public function setUid($uid)
-    {
-        $this->uid = $uid;
-    }
-
     public function getCreatedAt()
     {
         return $this->created_at;
+    }
+
+    public function setUid($uid)
+    {
+        $this->uid = $uid;
     }
 
 }
