@@ -49,6 +49,7 @@ class AuthRepository extends ServiceEntityRepository
                     ->setParameter('created_at', $startDate)
                     ->groupBy('e.user_id, dateAsMonth')
                     ->join('e.user', 'u')
+                    // ->addSelect('u')
                     ->getQuery()
                     ->getResult();
                     

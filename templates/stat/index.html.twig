@@ -1,3 +1,4 @@
+{% import "macro/utils.html.twig" as utils %}
 {% extends 'base.html.twig' %}
 {% block content %}
     <h1>AuthLog</h2>
@@ -10,7 +11,7 @@
         {% for p in registerPerMonth %}
             <tr>
                 <td>{{ p.city|e }}</td>
-                <td>{{ p.cnt|e }}</td>
+                <td>{{ utils.declension(p.cnt, ['пользователь','пользователя','пользователей']) }}</td>
             </tr>
         {% endfor %}
     </table>
@@ -23,10 +24,12 @@
         </tr>
         <tr>
         {% for a in authForWeek %}
-            <td>{{ a.total|e }}</td>
+            <td>{{ utils.declension(u.total, ['посетитель','посетителя','посетителей']) }}</td>
         {% endfor %}
         </tr>
     </table>
+    
+
     <h3>Посещало за 7 дней</h3>
     <table>
     <tr>
@@ -36,7 +39,21 @@
         {% endfor %}
         </td>
     </tr>
+    {% for key,us in usersForWeek %}
+        <tr>
+            <td>{{ key }}</td>
+            {% for u in us %}
+                {% if u is null %}
+                    <td>Нет посещений</td>
+                {% else %}
+                    <td>{{ utils.declension(u.total, ['посещение','посещения','посещений']) }}</td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+    {% endfor %}
     </table>
+
+
     <h3>Дни рождения 7 дня</h3>
     <table>
         <tr>

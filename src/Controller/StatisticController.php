@@ -19,12 +19,13 @@ class StatisticController extends Controller
         
         $userRepository = $this->getDoctrine()->getRepository(User::class);
         $authRepository = $this->getDoctrine()->getRepository(Auth::class);
-
-        $registerPerMonth = $userRepository->allRegisterUserByDate(date('Y-m-01'));
         
         $authForWeek = $authRepository->allActiveLoginByDate(7);
         $usersForWeek = $authRepository->allActiveLoginByUsername(7);
-        // var_dump($usersForWeek);exit;
+        $usersForWeek = $this->formatUsersList($usersForWeek);
+
+        $registerPerMonth = $userRepository->allRegisterUserByDate(date('Y-m-01'));
+
         $birthdaysForSevenDay = $userRepository->birthdayByDate(7);
         $birthdaysForThreeDay = $userRepository->birthdayByDate(3);
 
@@ -39,6 +40,37 @@ class StatisticController extends Controller
                 'usersForWeek' => $usersForWeek
             ]
         );
+    }
+
+    private function formatUsersList($users)
+    {
+        $out = [];
+        // create all days array
+        $days =  array_unique(array_map(function ($i) { return $i['dateAsMonth']; }, $users));
+        // create all uids array
+        $uids =  array_unique(array_map(function ($i) { return $i['user_id']; }, $users));
+
+        //blank associative array
+        foreach ($days as $d) 
+            foreach ($uids as $u) 
+                $out[$u][$d] = null;
+
+        foreach ($users as $user) 
+            $out[$user['user_id']][$user['dateAsMonth']] = $user;
+
+        //rename uid an usernames
+        foreach ($out as $users) {
+            foreach ($users as $u) {
+                if ($u !== null) {
+                    $username = $u['firstName'] . ' ' . $u['secondName'];
+                    $out[$username] = $out[$u['user_id']];
+                    unset($out[$u['user_id']]);
+                    break;
+                }
+            }
+        }
+
+        return $out;
     }
 
 }
