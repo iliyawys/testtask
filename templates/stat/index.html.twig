@@ -19,12 +19,12 @@
     <table>
         <tr>
         {% for a in authForWeek %}
-            <td>{{ a.dateAsMonth|e }}</td>
+            <td>{{ a.dateAsMonth|date("d F") }}</td>
         {% endfor %}
         </tr>
         <tr>
         {% for a in authForWeek %}
-            <td>{{ utils.declension(u.total, ['посетитель','посетителя','посетителей']) }}</td>
+            <td>{{ utils.declension(a.total, ['посетитель','посетителя','посетителей']) }}</td>
         {% endfor %}
         </tr>
     </table>
@@ -35,7 +35,7 @@
     <tr>
         <td>Имя</td>
         {% for a in authForWeek %}
-            <td>{{ a.dateAsMonth|e }}</td>
+            <td>{{ a.dateAsMonth|date("d F") }}</td>
         {% endfor %}
         </td>
     </tr>
@@ -63,7 +63,7 @@
         {% for bs in birthdaysForSevenDay %}
             <tr>
                 <td>{{ bs.firstName|e }} {{ bs.secondName|e }}</td>
-                <td>{{ bs.birthday|date("d-m-Y") }}</td>
+                <td>{{ bs.birthday|date("d F Y") }}</td>
             </tr>
         {% endfor %}
     </table>
@@ -76,7 +76,7 @@
         {% for bt in birthdaysForThreeDay %}
             <tr>
                 <td>{{ bt.firstName|e }} {{ bt.secondName|e }}</td>
-                <td>{{ bt.birthday|date("d-m-Y") }}</td>
+                <td>{{ bt.birthday|date("d F Y") }}</td>
             </tr>
         {% endfor %}
     </table>

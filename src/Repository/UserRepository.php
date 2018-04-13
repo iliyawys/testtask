@@ -23,10 +23,10 @@ class UserRepository extends ServiceEntityRepository
         $startDate = date('Y-m-01');
 
         $query = $entityManager->createQuery(
-        'SELECT p.city,count(p.city) as cnt  
-        FROM App\Entity\User p
-        WHERE p.created_at >= :startDate
-        GROUP BY p.city'
+            'SELECT p.city,count(p.city) as cnt  
+            FROM App\Entity\User p
+            WHERE p.created_at >= :startDate
+            GROUP BY p.city'
         )->setParameter('startDate', $date);
 
         return $query->execute();

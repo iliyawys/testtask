@@ -29,8 +29,6 @@ class RegistrationController extends Controller
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
             return $this->redirectToRoute('user_login');
         }
 

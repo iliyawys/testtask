@@ -12,7 +12,6 @@ class AuthRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Auth::class);
     }
-    
 
     /**
      * @param $day
@@ -21,6 +20,7 @@ class AuthRepository extends ServiceEntityRepository
     public function allActiveLoginByDate($dayBack): array
     {
         $entityManager = $this->getEntityManager();
+
         $startDateTimestamp = getdate(mktime(0, 0, 0, date('m'), date('d') - (int) $dayBack, date('Y')))[0];
         $startDate = date('Y-m-d',$startDateTimestamp);
 
@@ -40,6 +40,7 @@ class AuthRepository extends ServiceEntityRepository
     public function allActiveLoginByUsername($dayBack): array
     {
         $entityManager = $this->getEntityManager();
+     
         $startDateTimestamp = getdate(mktime(0, 0, 0, date('m'), date('d') - (int) $dayBack, date('Y')))[0];
         $startDate = date('Y-m-d',$startDateTimestamp);
 
@@ -49,7 +50,6 @@ class AuthRepository extends ServiceEntityRepository
                     ->setParameter('created_at', $startDate)
                     ->groupBy('e.user_id, dateAsMonth')
                     ->join('e.user', 'u')
-                    // ->addSelect('u')
                     ->getQuery()
                     ->getResult();
                     

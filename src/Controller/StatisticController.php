@@ -20,6 +20,7 @@ class StatisticController extends Controller
         $userRepository = $this->getDoctrine()->getRepository(User::class);
         $authRepository = $this->getDoctrine()->getRepository(Auth::class);
         
+        //numbers in the arguments is value of days to select
         $authForWeek = $authRepository->allActiveLoginByDate(7);
         $usersForWeek = $authRepository->allActiveLoginByUsername(7);
         $usersForWeek = $this->formatUsersList($usersForWeek);
@@ -41,7 +42,13 @@ class StatisticController extends Controller
             ]
         );
     }
-
+    
+    /**
+     * Formating users array for twig loops
+     *
+     * @param $users
+     * @return $users
+     */
     private function formatUsersList($users)
     {
         $out = [];
