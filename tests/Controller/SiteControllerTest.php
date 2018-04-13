@@ -3,6 +3,7 @@
 namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\HttpFoundation\Response;
 
 class SiteControllerTest extends WebTestCase
 {
@@ -31,20 +32,20 @@ class SiteControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->request('GET', '/successAuth');
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertTrue($client->getResponse()->isRedirect());
     }
 
     public function testShowStat()
     {
         $client = static::createClient();
         $client->request('GET', '/stat');
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertTrue($client->getResponse()->isRedirect());
     }
 
     public function testShowLogout()
     {
         $client = static::createClient();
         $client->request('GET', '/logout');
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertTrue($client->getResponse()->isRedirect());
     }
 }
