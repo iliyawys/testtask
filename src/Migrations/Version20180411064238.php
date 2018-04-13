@@ -15,7 +15,7 @@ class Version20180411064238 extends AbstractMigration
      */
     public function up(Schema $schema)
     {
-        $sql = 'CREATE TABLE `users` (
+        $sql = 'CREATE TABLE `user` (
         `id` int(10) NULL,
         `first_name` varchar(255) NOT NULL,
         `second_name` varchar(255) NOT NULL,

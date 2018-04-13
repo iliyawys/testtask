@@ -25,7 +25,7 @@ class AuthRepository extends ServiceEntityRepository
         $startDate = date('Y-m-d',$startDateTimestamp);
 
         return $qb = $this->createQueryBuilder('e')
-                    ->select('DATE(e.created_at) as dateAsMonth, count(e.uid) total')
+                    ->select('DATE(e.created_at) as dateAsMonth, count(e.user_id) total')
                     ->andWhere('e.created_at >= :created_at')
                     ->setParameter('created_at', $startDate)
                     ->groupBy('dateAsMonth')
@@ -44,10 +44,11 @@ class AuthRepository extends ServiceEntityRepository
         $startDate = date('Y-m-d',$startDateTimestamp);
 
         return $qb = $this->createQueryBuilder('e')
-                    ->select('DATE(e.created_at) as dateAsMonth, e.uid')
+                    ->select('e.user_id, count(e.user_id) total, DATE(e.created_at) as dateAsMonth, u.firstName, u.secondName')
                     ->andWhere('e.created_at >= :created_at')
                     ->setParameter('created_at', $startDate)
-                    ->groupBy('e.uid, dateAsMonth')
+                    ->groupBy('e.user_id, dateAsMonth')
+                    ->join('e.user', 'u')
                     ->getQuery()
                     ->getResult();
                     

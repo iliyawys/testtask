@@ -24,9 +24,9 @@ class Auth
     /**
      * @var integer
      *
-     * @ORM\Column(name="uid", type="integer", nullable=false)
+     * @ORM\Column(name="user_id", type="integer", nullable=false)
      */
-    private $uid;
+    private $user_id;
 
     /**
      * @var datetime
@@ -34,6 +34,22 @@ class Auth
      * @ORM\Column(name="created_at", type="datetime", nullable=true)
      */
     private $created_at;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="users")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $user;
+
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+    }
 
     function __construct()
     {
@@ -45,9 +61,14 @@ class Auth
         return $this->created_at;
     }
 
-    public function setUid($uid)
+    public function getUserId()
     {
-        $this->uid = $uid;
+        return $this->user_id;
+    }
+
+    public function setUserId($uid)
+    {
+        $this->user_id = $uid;
     }
 
 }

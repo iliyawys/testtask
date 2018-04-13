@@ -6,6 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use App\Entity\Auth;
 
 /**
  * Users
@@ -86,9 +89,23 @@ class User implements UserInterface
      */
     private $created_at;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Auth", mappedBy="auth")
+     */
+    private $auths;
+
     function __construct()
     {
         $this->created_at = new \DateTime();
+        $this->auths = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|Auth[]
+     */
+    public function getAuths()
+    {
+        return $this->auths;
     }
 
     public function getCreatedAt()

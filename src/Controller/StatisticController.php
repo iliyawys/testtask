@@ -16,7 +16,6 @@ class StatisticController extends Controller
      */
     public function statisticAction()
     {
-        // echo date("d.m.Y", strtotime("last Monday"));
         
         $userRepository = $this->getDoctrine()->getRepository(User::class);
         $authRepository = $this->getDoctrine()->getRepository(Auth::class);
@@ -25,7 +24,7 @@ class StatisticController extends Controller
         
         $authForWeek = $authRepository->allActiveLoginByDate(7);
         $usersForWeek = $authRepository->allActiveLoginByUsername(7);
-
+        // var_dump($usersForWeek);exit;
         $birthdaysForSevenDay = $userRepository->birthdayByDate(7);
         $birthdaysForThreeDay = $userRepository->birthdayByDate(3);
 
