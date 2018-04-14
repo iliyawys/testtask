@@ -66,9 +66,9 @@ class Auth
         return $this->user_id;
     }
 
-    public function setUserId($uid)
+    public function setUserId($user_id)
     {
-        $this->user_id = $uid;
+        $this->user_id = $user_id;
     }
 
 }

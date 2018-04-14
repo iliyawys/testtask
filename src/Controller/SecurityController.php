@@ -34,9 +34,8 @@ class SecurityController extends Controller
         $user = $this->getUser();
 
         $entityManager = $this->getDoctrine()->getManager();
-        
         $auth = new Auth();
-        $auth->setUid($user->getId());
+        $auth->setUser($user);
         
         $entityManager->persist($auth);
         $entityManager->flush();
